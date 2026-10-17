@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.8.0] — 2026-10-17
+### Added
+- **All tab** — 5th tier tab that shows every rig across all tiers at once. Default view on load.
+
 ## [1.7.0] — 2026-10-16
 ### Added
 - **12 rig layouts** for the Only Heat Reduction tier (590k–2.65m MIPS, 1–3 cases). All validated against D-data component counts.

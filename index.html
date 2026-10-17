@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.7.0 | Author: Frieza [4025189] -->
+<!-- Version: 1.8.0 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -45,6 +45,7 @@ color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter
 .tier-tab[data-tier="NO Educations"]{--tab-color:var(--red);--tab-glow:0 0 8px rgba(255,107,92,.4)}
 .tier-tab[data-tier="NO OC + Heat Red"]{--tab-color:var(--amber);--tab-glow:0 0 8px rgba(255,207,63,.4)}
 .tier-tab[data-tier="30% OC"]{--tab-color:var(--cyan);--tab-glow:0 0 8px rgba(56,198,255,.4)}
+.tier-tab[data-tier="ALL"]{--tab-color:#fff;--tab-glow:0 0 8px rgba(255,255,255,.35)}
 .tier-tab[data-tier="50% OC"]{--tab-color:var(--txt);--tab-glow:var(--glow)}
 .tier-tab:hover{border-color:var(--tab-color);color:var(--tab-color)}
 .tier-tab.active{background:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,.2));border-color:var(--tab-color);color:var(--tab-color);box-shadow:var(--tab-glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
@@ -151,7 +152,8 @@ body.panel-open .crt-footer{right:calc(var(--panel-w) + 22px)}
 <button class="tbtn" id="collapseAll">Collapse all</button>
 </div>
 <div class="tier-tabs">
-<button class="tier-tab active" data-tier="NO Educations">No Educations</button>
+<button class="tier-tab active" data-tier="ALL">All</button>
+<button class="tier-tab" data-tier="NO Educations">No Educations</button>
 <button class="tier-tab" data-tier="NO OC + Heat Red">Only Heat Reduction</button>
 <button class="tier-tab" data-tier="30% OC">30% Overclock</button>
 <button class="tier-tab" data-tier="50% OC">50% Overclock</button>
@@ -176,7 +178,7 @@ const search=document.getElementById("search");
 const count=document.getElementById("count");
 const expanded=new Set();
 let sortCol=2,sortAsc=true;
-let tierFilter="NO Educations";
+let tierFilter="ALL";
 const TIER_DISPLAY={"NO Educations":"No Educations","NO OC + Heat Red":"Only Heat Reduction","30% OC":"30% Overclock","50% OC":"50% Overclock"};
 
 const COMPONENTS=[["eCPU",6],["CPU",7],["HPCU",8],["Fan",9],["Water Block",10],["Heat Sink",11],["PSU",12]];
@@ -226,7 +228,7 @@ if(typeof va==="string"||typeof vb==="string")return sortAsc?String(va).localeCo
 return sortAsc?va-vb:vb-va;
 }
 function getView(){
-let data=D.filter(r=>r[0]===tierFilter);
+let data=tierFilter==="ALL"?[...D]:D.filter(r=>r[0]===tierFilter);
 const q=search.value.trim().toLowerCase();
 if(q)data=data.filter(r=>r.join(" ").toLowerCase().includes(q));
 if(sortCol!==null)data.sort((a,b)=>cmp(a,b,sortCol));
@@ -503,7 +505,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE &middot; RIG DATABASE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.7.0 <span class="badge">TERMINAL</span></span>
+<span>v1.8.0 <span class="badge">TERMINAL</span></span>
 </footer>
 </body>
 </html>
