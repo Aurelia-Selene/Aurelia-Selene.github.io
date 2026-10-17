@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.13.0] — 2026-10-17
+### Changed
+- **Bar colors** — lit segments now follow the % readout: green ≤100%, amber to 130%, red above (replaces the cyan OC zone).
+
+## [1.12.0] — 2026-10-17
+### Changed
+- **Power % readout** — moved below the bar, next to the PSU count; now color-coded (green ≤100%, amber to 130%, red above).
+
+## [1.11.0] — 2026-10-17
+### Added
+- **Power % readout** — Rig power now shows draw as a % of PSU capacity (e.g. `610 W / 1500 W (41%)`).
+
+## [1.10.1] — 2026-10-17
+### Fixed
+- **No-PSU guard** — a rig with 0 PSU shows "No PSU" and a 0 bar instead of a 0/0 W readout.
+
+## [1.10.0] — 2026-10-17
+### Added
+- **Segmented power bar** — 15-segment visual bar in the Rig Power stat. Green (1–7), amber (8–9), red (10), cyan OC zone (11–15). Replaces the old text-color indicator.
+- **OC-aware power draw** — CPU wattage multiplied by tier OC rate (30% OC → ×1.3, 50% OC → ×1.5). Fans unaffected. OC segments stay dim for non-OC rigs.
+
 ## [1.9.0] — 2026-10-17
 ### Added
 - **WIP indicator** — empty case grids show a dashed border with a "Layout Pending" overlay. Amber "Work in Progress" badge below the site title.
