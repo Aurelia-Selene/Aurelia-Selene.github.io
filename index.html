@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.16.0 | Author: Frieza [4025189] -->
+<!-- Version: 1.20.0 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -41,6 +41,9 @@ color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter
 .tier-tabs{display:flex;gap:0;justify-content:center;margin-bottom:14px;border:1px solid var(--line);
 overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .tier-tabs::-webkit-scrollbar{display:none}
+.tier-tabs.fade-l{-webkit-mask-image:linear-gradient(to right,transparent,#000 24px);mask-image:linear-gradient(to right,transparent,#000 24px)}
+.tier-tabs.fade-r{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent)}
+.tier-tabs.fade-l.fade-r{-webkit-mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
 .tier-tab{padding:8px 16px;border:none;border-right:1px solid var(--line);background:#04100a;
 color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;cursor:pointer;transition:.12s;flex-shrink:0;scroll-snap-align:start}
 .tier-tab:last-child{border-right:none}
@@ -90,9 +93,10 @@ box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 .sim-cases{flex:0 1 auto;display:flex;flex-wrap:wrap;gap:1rem;align-content:center}
 .sim-right{flex:1 1 0;min-width:17rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));gap:.5rem}
-.stat{border:1px solid var(--line);background:#05100a;padding:.5rem .75rem;display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.stat{border:1px solid var(--line);background:#05100a;padding:.5rem .75rem;display:flex;flex-direction:column;justify-content:center;gap:.2rem;min-width:0}
 .stat .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint);text-align:center}
 .stat .v{font-size:1.1rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.2;text-align:center}
+.stat .v.pw{font-size:.9rem}
 .power-bar{position:relative;display:flex;gap:2px;margin-top:.3rem}
 .power-seg{flex:1;height:5px;background:#0a1a12}
 .power-seg.oc-seg{background:#0c1218}
@@ -312,7 +316,7 @@ return `<div class="sim">`+
 `<div class="stat"><span class="k">MIPS</span><span class="v">${r[2].toLocaleString()}</span><span class="sub">from rig</span></div>`+
 `<div class="stat"><span class="k">BFS</span><span class="v">${r[3]}</span><span class="sub">brute-force strength</span></div>`+
 `<div class="stat"><span class="k">Components</span><span class="v">${total}</span><span class="sub">total</span></div>`+
-`<div class="stat"><span class="k">Rig power</span><span class="v">${noPSU?"No PSU":draw.toLocaleString()+" W / "+cap.toLocaleString()+" W"}</span>${pbar}<span class="sub">${noPSU?"No PSU installed":"<span class=\"pct "+pctCls+"\">"+pct+"%</span>"}</span></div>`+
+`<div class="stat"><span class="k">Rig power</span><span class="v pw">${noPSU?"No PSU":draw.toLocaleString()+"\u00A0W / "+cap.toLocaleString()+"\u00A0W"}</span>${pbar}<span class="sub">${noPSU?"No PSU installed":"<span class=\"pct "+pctCls+"\">"+pct+"%</span>"}</span></div>`+
 `<div class="stat"><span class="k">Heat gain</span><span class="v">${r[4]}</span><span class="sub">heat</span></div>`+
 `<div class="stat"><span class="k">Rig uses</span><span class="v">${r[5]==="∞"?"∞":r[5]}</span><span class="sub">uses</span></div>`+
 `</div>`+
@@ -361,6 +365,14 @@ expanded.clear();
 render();
 });
 });
+const tierTabs=document.querySelector(".tier-tabs");
+function tierFades(){
+tierTabs.classList.toggle("fade-l",tierTabs.scrollLeft>2);
+tierTabs.classList.toggle("fade-r",tierTabs.scrollLeft+tierTabs.clientWidth<tierTabs.scrollWidth-2);
+}
+tierTabs.addEventListener("scroll",tierFades,{passive:true});
+window.addEventListener("resize",tierFades);
+tierFades();
 document.querySelectorAll(".sortbar button").forEach(btn=>{
 btn.addEventListener("click",()=>{
 const ci=parseInt(btn.dataset.col);
@@ -556,7 +568,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.16.0</span>
+<span>v1.20.0</span>
 </footer>
 </body>
 </html>

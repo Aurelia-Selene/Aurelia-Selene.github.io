@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.20.0] — 2026-10-17
+### Added
+- **Tab scroll affordance** — the tier tab bar fades at whichever edge has more tabs, signaling it can be scrolled horizontally.
+
+## [1.19.0] — 2026-10-17
+### Changed
+- **Vertical centering** — stat box contents now center vertically, so shorter boxes don't leave dead space when a neighbor stretches the row.
+
+## [1.18.0] — 2026-10-17
+### Fixed
+- **Mobile wrap** — kept each wattage unit together so the power value breaks cleanly on small screens instead of orphaning a "W".
+
+## [1.17.0] — 2026-10-17
+### Changed
+- **Power value size** — reduced the wattage font so the longest rig stays on one line.
+
 ## [1.16.0] — 2026-10-17
 ### Changed
 - **Centered stats** — label and value now center in each stat box, matching the readout.
