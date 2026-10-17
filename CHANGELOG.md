@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1] — 2026-10-17
+### Fixed
+- **Tier tabs on mobile** — tab bar scrolls horizontally with snap points instead of clipping. Tighter padding below 640px.
+- **Sidebar overlay** — the Cracking Reference panel now overlays content instead of squishing the layout.
+- **Footer** — trimmed to just the online dot, author, and version. Dropped "RIG DATABASE" and the TERMINAL badge.
+- **Info button** — replaced the text label with a compact circular `?` icon.
+
 ## [1.8.0] — 2026-10-17
 ### Added
 - **All tab** — 5th tier tab that shows every rig across all tiers at once. Default view on load.

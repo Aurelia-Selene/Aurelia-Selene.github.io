@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.8.0 | Author: Frieza [4025189] -->
+<!-- Version: 1.8.1 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -38,9 +38,11 @@ border-radius:0;background-color:#04100a;color:var(--txt);font:inherit;letter-sp
 .tbtn{padding:8px 14px;border:1px solid var(--line);border-radius:0;background:#04100a;
 color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.12s}
 .tbtn:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft);text-shadow:var(--glow)}
-.tier-tabs{display:flex;gap:0;justify-content:center;margin-bottom:14px;border:1px solid var(--line)}
+.tier-tabs{display:flex;gap:0;justify-content:flex-start;margin-bottom:14px;border:1px solid var(--line);
+overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tier-tabs::-webkit-scrollbar{display:none}
 .tier-tab{padding:8px 16px;border:none;border-right:1px solid var(--line);background:#04100a;
-color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;cursor:pointer;transition:.12s}
+color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;cursor:pointer;transition:.12s;flex-shrink:0;scroll-snap-align:start}
 .tier-tab:last-child{border-right:none}
 .tier-tab[data-tier="NO Educations"]{--tab-color:var(--red);--tab-glow:0 0 8px rgba(255,107,92,.4)}
 .tier-tab[data-tier="NO OC + Heat Red"]{--tab-color:var(--amber);--tab-glow:0 0 8px rgba(255,207,63,.4)}
@@ -49,6 +51,9 @@ color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter
 .tier-tab[data-tier="50% OC"]{--tab-color:var(--txt);--tab-glow:var(--glow)}
 .tier-tab:hover{border-color:var(--tab-color);color:var(--tab-color)}
 .tier-tab.active{background:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,.2));border-color:var(--tab-color);color:var(--tab-color);box-shadow:var(--tab-glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
+@media(max-width:640px){
+.tier-tab{padding:8px 12px;font-size:10px;letter-spacing:1px}
+}
 .sortbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-bottom:8px;font-size:12px}
 .sortbar .lbl{color:var(--txt-faint);text-transform:uppercase;letter-spacing:1.5px;margin-right:2px}
 .sortbar button{padding:5px 11px;border:1px solid var(--line);border-radius:0;background:#04100a;
@@ -105,11 +110,11 @@ box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 .comp:hover::after{content:attr(title);position:absolute;bottom:2px;right:3px;font-size:.6rem;letter-spacing:.4px;color:var(--txt);text-shadow:var(--glow);background:rgba(4,12,7,.8);padding:1px 4px;border:1px solid var(--line-soft)}
 .crt-footer{position:fixed;left:0;right:0;bottom:0;z-index:900;display:flex;justify-content:space-between;align-items:center;gap:10px;
 border-top:1px solid var(--line);background:#050d08;padding:11px 22px;
-font-size:11px;color:var(--txt-faint);text-transform:uppercase;letter-spacing:2px;transition:right .22s ease}
+font-size:11px;color:var(--txt-faint);text-transform:uppercase;letter-spacing:2px}
 .crt-footer .badge{border:1px solid var(--line);padding:2px 8px;color:var(--txt-mid);letter-spacing:2px}
 .crt-footer .author{color:var(--txt);text-shadow:0 0 8px rgba(61,255,134,.5);letter-spacing:2.5px;font-weight:700}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--txt);box-shadow:var(--glow);margin-right:7px;animation:blink 1.4s steps(1) infinite;vertical-align:middle}
-.info-toggle{position:fixed;top:14px;right:16px;z-index:1200;padding:8px 14px;border:1px solid var(--line);border-radius:0;background:#04100a;color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.12s}
+.info-toggle{position:fixed;top:12px;right:12px;z-index:1200;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:#04100a;color:var(--txt-mid);font:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center;padding:0}
 .info-toggle:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft);text-shadow:var(--glow)}
 .info-toggle.hidden{display:none}
 .info-panel{position:fixed;top:0;right:0;bottom:0;width:var(--panel-w);background:#050d08;border-left:1px solid var(--line);box-shadow:-10px 0 34px rgba(0,0,0,.65);transform:translateX(102%);transition:transform .22s ease;z-index:1100;display:flex;flex-direction:column}
@@ -120,8 +125,6 @@ font-size:11px;color:var(--txt-faint);text-transform:uppercase;letter-spacing:2p
 .info-close:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft)}
 .info-panel-body{padding:16px;overflow-y:auto;overflow-x:hidden;overflow-wrap:break-word;word-break:break-word;line-height:1.7;flex:1}
 .info-placeholder{color:var(--txt-faint);letter-spacing:1.5px;text-transform:uppercase;font-size:12px;margin-bottom:10px}
-body.panel-open{padding-right:calc(var(--panel-w) + 22px)}
-body.panel-open .crt-footer{right:calc(var(--panel-w) + 22px)}
 .info-panel-body h3{color:var(--txt);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line);text-shadow:var(--glow)}
 .info-panel-body h3:first-child{margin-top:0}
 .info-panel-body p{color:var(--txt-mid);font-size:13px;margin:0 0 10px}
@@ -335,7 +338,7 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
 updateSortUI();
 render();
 </script>
-<button id="infoToggle" class="info-toggle">▸ Cracking Info</button>
+<button id="infoToggle" class="info-toggle">?</button>
 <aside id="infoPanel" class="info-panel" aria-hidden="true">
 <div class="info-panel-head">
 <span class="info-panel-title">Cracking Reference</span>
@@ -503,9 +506,9 @@ render();
 </div>
 </aside>
 <footer class="crt-footer">
-<span><span class="dot"></span>ONLINE &middot; RIG DATABASE</span>
+<span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.8.0 <span class="badge">TERMINAL</span></span>
+<span>v1.8.1</span>
 </footer>
 </body>
 </html>
