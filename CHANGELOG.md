@@ -1,5 +1,21 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.20.2] — 2026-10-18
+### Added
+- **Keep a Changelog header + `[Unreleased]` block** — the changelog now opens with the standard intro and an empty `[Unreleased]` section for in-flight changes.
+
+## [1.20.1] — 2026-10-18
+### Changed
+- **BFS formula** — replaced the community-guide `0.0052 × √MIPS − 0.6252` approximation (Emforus [2535044] / Gandalf [2031904]) with a curve fitted to observed rig readings (100k–3M MIPS): `14.069 × ln(MIPS) − 89.410 × √ln(MIPS) + 142.386` (≈ ±0.05).
+- **Rig BFS values** — recomputed all **96** rigs from their MIPS using the new curve; 75 values shifted by up to 0.06.
+- **BFS threshold table** — MIPS-per-BFS row recalculated (102k / 244k / 468k / 809k / 1.3M / 2.05M) to match the new curve.
+
 ## [1.20.0] — 2026-10-17
 ### Added
 - **Tab scroll affordance** — the tier tab bar fades at whichever edge has more tabs, signaling it can be scrolled horizontally.
@@ -204,7 +220,7 @@ _First tracked release._
 - Expandable right-side **Cracking Reference** panel summarizing the community guide — core mechanics, components, BFS formula + thresholds, heat & overheating, cooling, overclocking, rig classifications, design patterns, skill-growth paths, honors & merits, enhancers & tools, education, and key formulas.
 
 ### Notes
-- BFS formula follows the guide: `BFS = 0.0052 × √MIPS − 0.6252` (approximate, ±3%).
+- BFS formula follows the community guide (Emforus [2535044] / Gandalf [2031904]): `BFS = 0.0052 × √MIPS − 0.6252` (approximate, ±3%).
 - Rig power = PSU count × 750 W.
 
 ---

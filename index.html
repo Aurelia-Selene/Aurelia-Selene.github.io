@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.20.0 | Author: Frieza [4025189] -->
+<!-- Version: 1.20.2 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -433,10 +433,11 @@ render();
 <p>Parts work <b>across the whole rig</b> (a PSU in one chassis powers CPUs in another); <b>heat stays per-chassis</b>, and a slot's heat carries to the next part you install there.</p>
 
 <h3>Brute-Force Strength (BFS)</h3>
-<p><code>BFS = 0.0052 × √MIPS − 0.6252</code> <span style="color:var(--txt-faint);font-size:11px">(≈ ±3%)</span></p>
+<p><code>BFS = 14.069 × ln(MIPS) − 89.410 × √ln(MIPS) + 142.386</code> <span style="color:var(--txt-faint);font-size:11px">(≈ ±0.05, ln = natural log)</span></p>
 <p>Higher BFS = more brute-force cycles per attempt = faster cracking. Extra MIPS raise BFS with <b>diminishing (logarithmic) returns</b> — so more MIPS ≠ proportionally faster.</p>
+<p><span style="color:var(--txt-faint);font-size:11px">Torn does not publish the exact formula; this is fitted to observed rig values (100k–3M MIPS).</span></p>
 <table>
-<tr><th>MIPS</th><td>100k</td><td>250k</td><td>425k</td><td>805k</td><td>1.3M</td><td>2M</td></tr>
+<tr><th>MIPS</th><td>102k</td><td>244k</td><td>468k</td><td>809k</td><td>1.3M</td><td>2.05M</td></tr>
 <tr><th>BFS</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
 </table>
 
@@ -557,7 +558,7 @@ render();
 </table>
 <h3>Key Formulas</h3>
 <ul>
-<li><code>BFS = 0.0052 × √MIPS − 0.6252</code></li>
+<li><code>BFS = 14.069 × ln(MIPS) − 89.410 × √ln(MIPS) + 142.386</code></li>
 <li><code>Total MIPS = Σ component MIPS (after OC)</code></li>
 <li><code>Total Power = Σ component draw (after OC) ≤ budget</code></li>
 <li><code>Heat = (base × OC) − Σ cooling(adjacent)</code></li>
@@ -568,7 +569,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.20.0</span>
+<span>v1.20.2</span>
 </footer>
 </body>
 </html>
