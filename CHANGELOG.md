@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.9.0] — 2026-10-17
+### Added
+- **WIP indicator** — empty case grids show a dashed border with a "Layout Pending" overlay. Amber "Work in Progress" badge below the site title.
+### Changed
+- **Title** — renamed to "Frieza's Cracking Rig Database". Removed the blinking cursor.
+
 ## [1.8.3] — 2026-10-17
 ### Changed
 - **Compact stat cards** — reduced padding, font size, and grid gaps in the expanded rig panel.
