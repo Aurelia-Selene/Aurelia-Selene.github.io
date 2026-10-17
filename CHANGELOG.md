@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.20.3] — 2026-10-18
+### Changed
+- **BFS precision** — recomputed all **96** BFS values to 4 decimal places from the fitted curve and displayed to 4 dp (e.g. `3.85` → `3.8573`), matching the in-game readout.
+
 ## [1.20.2] — 2026-10-18
 ### Added
 - **Keep a Changelog header + `[Unreleased]` block** — the changelog now opens with the standard intro and an empty `[Unreleased]` section for in-flight changes.

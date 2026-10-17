@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.20.2 | Author: Frieza [4025189] -->
+<!-- Version: 1.20.3 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -271,7 +271,7 @@ function headerHTML(r){
 return `<span class="tier-badge">${TIER_DISPLAY[r[0]]||r[0]}</span>`+
 `<span class="meta"><b>MIPS</b>${r[2].toLocaleString()}</span>`+
 `<span class="meta"><b>Cases</b>${r[1]}</span>`+
-`<span class="meta"><b>BFS</b>${r[3]}</span>`+
+`<span class="meta"><b>BFS</b>${r[3].toFixed(4)}</span>`+
 `<span class="meta"><b>Heat</b>${r[4]}</span>`+
 `<span class="meta"><b>Uses</b>${r[5]==="∞"?"∞":r[5]}</span>`+
 `<span class="chev">&#9656;</span>`;
@@ -314,7 +314,7 @@ return `<div class="sim">`+
 `<div class="sim-right">`+
 `<div class="stat-grid">`+
 `<div class="stat"><span class="k">MIPS</span><span class="v">${r[2].toLocaleString()}</span><span class="sub">from rig</span></div>`+
-`<div class="stat"><span class="k">BFS</span><span class="v">${r[3]}</span><span class="sub">brute-force strength</span></div>`+
+`<div class="stat"><span class="k">BFS</span><span class="v">${r[3].toFixed(4)}</span><span class="sub">brute-force strength</span></div>`+
 `<div class="stat"><span class="k">Components</span><span class="v">${total}</span><span class="sub">total</span></div>`+
 `<div class="stat"><span class="k">Rig power</span><span class="v pw">${noPSU?"No PSU":draw.toLocaleString()+"\u00A0W / "+cap.toLocaleString()+"\u00A0W"}</span>${pbar}<span class="sub">${noPSU?"No PSU installed":"<span class=\"pct "+pctCls+"\">"+pct+"%</span>"}</span></div>`+
 `<div class="stat"><span class="k">Heat gain</span><span class="v">${r[4]}</span><span class="sub">heat</span></div>`+
@@ -569,7 +569,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.20.2</span>
+<span>v1.20.3</span>
 </footer>
 </body>
 </html>
