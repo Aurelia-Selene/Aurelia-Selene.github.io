@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.16.0] — 2026-10-17
+### Changed
+- **Centered stats** — label and value now center in each stat box, matching the readout.
+
+## [1.15.0] — 2026-10-17
+### Changed
+- **Centered readout** — the power % now sits centered under the bar.
+
+## [1.14.0] — 2026-10-17
+### Removed
+- **PSU count line** — dropped "N × 750 W PSU" from the power stat (already in component counts), freeing room on mobile.
+
 ## [1.13.0] — 2026-10-17
 ### Changed
 - **Bar colors** — lit segments now follow the % readout: green ≤100%, amber to 130%, red above (replaces the cyan OC zone).

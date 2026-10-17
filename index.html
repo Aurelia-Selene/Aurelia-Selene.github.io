@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.13.0 | Author: Frieza [4025189] -->
+<!-- Version: 1.16.0 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -91,8 +91,8 @@ box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 .sim-right{flex:1 1 0;min-width:17rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));gap:.5rem}
 .stat{border:1px solid var(--line);background:#05100a;padding:.5rem .75rem;display:flex;flex-direction:column;gap:.2rem;min-width:0}
-.stat .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint)}
-.stat .v{font-size:1.1rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.2}
+.stat .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint);text-align:center}
+.stat .v{font-size:1.1rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.2;text-align:center}
 .power-bar{position:relative;display:flex;gap:2px;margin-top:.3rem}
 .power-seg{flex:1;height:5px;background:#0a1a12}
 .power-seg.oc-seg{background:#0c1218}
@@ -100,8 +100,8 @@ box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 .power-seg.lit-a{background:var(--amber);box-shadow:0 0 3px rgba(255,207,63,.3)}
 .power-seg.lit-r{background:var(--red);box-shadow:0 0 3px rgba(255,107,92,.4)}
 .power-marker{position:absolute;top:-2px;bottom:-2px;width:2px;background:#fff;box-shadow:0 0 4px rgba(255,255,255,.7)}
-.stat .sub{font-size:.79rem;color:var(--txt-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stat .sub .pct{font-weight:700;margin-left:.35rem}
+.stat .sub{font-size:.79rem;color:var(--txt-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.stat .sub .pct{font-weight:700}
 .pct-g{color:var(--txt);text-shadow:var(--glow)}
 .pct-a{color:var(--amber);text-shadow:0 0 6px rgba(255,207,63,.35)}
 .pct-r{color:var(--red);text-shadow:0 0 6px rgba(255,107,92,.35)}
@@ -312,7 +312,7 @@ return `<div class="sim">`+
 `<div class="stat"><span class="k">MIPS</span><span class="v">${r[2].toLocaleString()}</span><span class="sub">from rig</span></div>`+
 `<div class="stat"><span class="k">BFS</span><span class="v">${r[3]}</span><span class="sub">brute-force strength</span></div>`+
 `<div class="stat"><span class="k">Components</span><span class="v">${total}</span><span class="sub">total</span></div>`+
-`<div class="stat"><span class="k">Rig power</span><span class="v">${noPSU?"No PSU":draw.toLocaleString()+" W / "+cap.toLocaleString()+" W"}</span>${pbar}<span class="sub">${noPSU?"No PSU installed":r[12]+" &times; 750 W PSU <span class=\"pct "+pctCls+"\">"+pct+"%</span>"}</span></div>`+
+`<div class="stat"><span class="k">Rig power</span><span class="v">${noPSU?"No PSU":draw.toLocaleString()+" W / "+cap.toLocaleString()+" W"}</span>${pbar}<span class="sub">${noPSU?"No PSU installed":"<span class=\"pct "+pctCls+"\">"+pct+"%</span>"}</span></div>`+
 `<div class="stat"><span class="k">Heat gain</span><span class="v">${r[4]}</span><span class="sub">heat</span></div>`+
 `<div class="stat"><span class="k">Rig uses</span><span class="v">${r[5]==="∞"?"∞":r[5]}</span><span class="sub">uses</span></div>`+
 `</div>`+
@@ -556,7 +556,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.13.0</span>
+<span>v1.16.0</span>
 </footer>
 </body>
 </html>
