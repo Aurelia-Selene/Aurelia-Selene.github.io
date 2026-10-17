@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.8.2 | Author: Frieza [4025189] -->
+<!-- Version: 1.8.3 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -86,13 +86,15 @@ box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 .panel.open .chev{transform:rotate(90deg)}
 .panel-body{display:none;padding:14px 16px 18px;border-top:1px solid var(--line);background:#060d08}
 .panel.open .panel-body{display:block}
-.sim{border:1px solid var(--line);background:#040c07;padding:1.4rem 1.7rem;box-shadow:inset 0 0 30px rgba(0,0,0,.6),var(--glow-soft);display:flex;flex-wrap:wrap;gap:1.75rem;align-items:center}
+.sim{border:1px solid var(--line);background:#040c07;padding:1rem 1.2rem;box-shadow:inset 0 0 30px rgba(0,0,0,.6),var(--glow-soft);display:flex;flex-wrap:wrap;gap:1.1rem;align-items:center}
 .sim-cases{flex:0 1 auto;display:flex;flex-wrap:wrap;gap:1rem;align-content:center}
-.sim-right{flex:1 1 0;min-width:17rem;display:flex;flex-direction:column;gap:1.1rem;justify-content:center}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.85rem}
-.stat{border:1px solid var(--line);background:#05100a;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.sim-right{flex:1 1 0;min-width:17rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr));gap:.5rem}
+.stat{border:1px solid var(--line);background:#05100a;padding:.5rem .75rem;display:flex;flex-direction:column;gap:.2rem;min-width:0}
 .stat .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint)}
-.stat .v{font-size:1.55rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.1;white-space:nowrap}
+.stat .v{font-size:1.1rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.2}
+.stat .v.p-warn{color:var(--amber)}
+.stat .v.p-over{color:var(--red)}
 .stat .sub{font-size:.79rem;color:var(--txt-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .comp-sec{border-top:1px solid var(--line);padding-top:.9rem}
 .comp-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint);margin-bottom:.65rem}
@@ -146,6 +148,17 @@ font-size:11px;color:var(--txt-faint);text-transform:uppercase;letter-spacing:2p
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--txt-dim),var(--txt-faint));border:2px solid #050f09;border-radius:6px}
 ::-webkit-scrollbar-thumb:hover{background:linear-gradient(var(--txt),var(--txt-mid))}
 ::-webkit-scrollbar-corner{background:#050f09}
+@media(max-width:640px){
+.sim{padding:.7rem .8rem;gap:.7rem}
+.sim-cases{width:100%}
+.case{width:100%}
+.stat-grid{grid-template-columns:repeat(3,1fr)}
+.stat{padding:.35rem .45rem}
+.stat .k{font-size:.6rem}
+.stat .v{font-size:.85rem}
+.stat .sub{font-size:.6rem}
+.chip{padding:.25rem .5rem;font-size:.75rem}
+}
 </style>
 </head>
 <body>
@@ -249,7 +262,9 @@ return `<span class="tier-badge">${TIER_DISPLAY[r[0]]||r[0]}</span>`+
 }
 function bodyHTML(r){
 const total=r.slice(6).reduce((s,v)=>s+v,0);
-const power=r[12]*750;
+const draw=r[6]*30+r[7]*70+r[8]*150+r[9]*5;
+const cap=r[12]*750;
+const pCls=draw>cap?"p-over":draw>cap*0.8?"p-warn":"";
 const comps=COMPONENTS.map(([name,i])=>`<span class="chip"><b>${name}</b>${r[i]}</span>`).join("");
 let cases="";
 const rigLayouts=LAYOUTS[r[0]+"|"+r[1]+"|"+r[2]];
@@ -265,7 +280,7 @@ return `<div class="sim">`+
 `<div class="stat"><span class="k">MIPS</span><span class="v">${r[2].toLocaleString()}</span><span class="sub">from rig</span></div>`+
 `<div class="stat"><span class="k">BFS</span><span class="v">${r[3]}</span><span class="sub">brute-force strength</span></div>`+
 `<div class="stat"><span class="k">Components</span><span class="v">${total}</span><span class="sub">total</span></div>`+
-`<div class="stat"><span class="k">Rig power</span><span class="v">${power.toLocaleString()} W</span><span class="sub">${r[12]} &times; 750 W PSU</span></div>`+
+`<div class="stat"><span class="k">Rig power</span><span class="v ${pCls}">${draw.toLocaleString()} W / ${cap.toLocaleString()} W</span><span class="sub">${r[12]} &times; 750 W PSU</span></div>`+
 `<div class="stat"><span class="k">Heat gain</span><span class="v">${r[4]}</span><span class="sub">heat</span></div>`+
 `<div class="stat"><span class="k">Rig uses</span><span class="v">${r[5]==="∞"?"∞":r[5]}</span><span class="sub">uses</span></div>`+
 `</div>`+
@@ -509,7 +524,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.8.2</span>
+<span>v1.8.3</span>
 </footer>
 </body>
 </html>

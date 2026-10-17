@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.8.3] — 2026-10-17
+### Changed
+- **Compact stat cards** — reduced padding, font size, and grid gaps in the expanded rig panel.
+- **Rig power shows draw / capacity** — calculated from component wattage (eCPU 30 W, CPU 70 W, HPCU 150 W, Fan 5 W). Amber at >80% load, red if over budget.
+- **Mobile layout** — case grids fill full width and sit above a 3-column compact stat grid. Smaller labels, values, and component chips below 640px.
+
 ## [1.8.2] — 2026-10-17
 ### Fixed
 - **Tier tab centering on desktop** — tabs are centered again above 640px; left-aligned below (mobile scroll fix).
