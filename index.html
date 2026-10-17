@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<!-- Version: 1.7.0 | Author: Frieza [4025189] -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cracking Rig Database</title>
+<style>
+:root{
+--bg:#050806;--panel:#081109;--panel2:#0a150d;
+--txt:#3dff86;--txt-mid:#37d17f;--txt-dim:#2a9d60;--txt-faint:#1c6a42;
+--line:#174a30;--line-soft:#0f2f1f;
+--cyan:#38c6ff;--amber:#ffcf3f;--red:#ff6b5c;
+--glow:0 0 8px rgba(61,255,134,.4);
+--glow-soft:0 0 12px rgba(61,255,134,.22);
+--panel-w:min(480px,92vw);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font:14px/1.6 Consolas,"Cascadia Mono","Courier New",monospace;
+background:radial-gradient(ellipse at 50% -10%, #0a150d 0%, #050806 70%) fixed;
+color:var(--txt-mid);padding:26px 22px 70px;letter-spacing:.2px;
+transition:padding-right .22s ease;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+background:radial-gradient(ellipse at center, rgba(0,0,0,0) 52%, rgba(0,0,0,.5) 100%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+background:repeating-linear-gradient(0deg, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.18) 2px 3px);opacity:.5}
+h1{font-size:1.35rem;text-align:center;text-transform:uppercase;letter-spacing:7px;
+color:var(--txt);font-weight:700;text-shadow:var(--glow);margin-bottom:20px}
+h1::after{content:"▌";margin-left:7px;animation:blink 1s steps(1) infinite;color:var(--txt);text-shadow:var(--glow)}
+@keyframes blink{50%{opacity:0}}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-bottom:14px}
+#search{flex:0 1 auto;min-width:240px;max-width:460px;padding:9px 12px;border:1px solid var(--line);
+border-radius:0;background-color:#04100a;color:var(--txt);font:inherit;letter-spacing:.5px;outline:none}
+#search::placeholder{color:var(--txt-faint);text-transform:lowercase}
+#search:focus{border-color:var(--txt);box-shadow:0 0 0 1px var(--line),var(--glow-soft)}
+.tbtn{padding:8px 14px;border:1px solid var(--line);border-radius:0;background:#04100a;
+color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.12s}
+.tbtn:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft);text-shadow:var(--glow)}
+.tier-tabs{display:flex;gap:0;justify-content:center;margin-bottom:14px;border:1px solid var(--line)}
+.tier-tab{padding:8px 16px;border:none;border-right:1px solid var(--line);background:#04100a;
+color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;cursor:pointer;transition:.12s}
+.tier-tab:last-child{border-right:none}
+.tier-tab[data-tier="NO Educations"]{--tab-color:var(--red);--tab-glow:0 0 8px rgba(255,107,92,.4)}
+.tier-tab[data-tier="NO OC + Heat Red"]{--tab-color:var(--amber);--tab-glow:0 0 8px rgba(255,207,63,.4)}
+.tier-tab[data-tier="30% OC"]{--tab-color:var(--cyan);--tab-glow:0 0 8px rgba(56,198,255,.4)}
+.tier-tab[data-tier="50% OC"]{--tab-color:var(--txt);--tab-glow:var(--glow)}
+.tier-tab:hover{border-color:var(--tab-color);color:var(--tab-color)}
+.tier-tab.active{background:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,.2));border-color:var(--tab-color);color:var(--tab-color);box-shadow:var(--tab-glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
+.sortbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-bottom:8px;font-size:12px}
+.sortbar .lbl{color:var(--txt-faint);text-transform:uppercase;letter-spacing:1.5px;margin-right:2px}
+.sortbar button{padding:5px 11px;border:1px solid var(--line);border-radius:0;background:#04100a;
+color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:.12s}
+.sortbar button:hover{border-color:var(--txt);color:var(--txt)}
+.sortbar button.active{background:linear-gradient(#1c7a4a,#145834);border-color:var(--txt);color:#eafff2;
+box-shadow:var(--glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
+.sortbar button.asc::after{content:" ▲";font-size:9px}
+.sortbar button.desc::after{content:" ▼";font-size:9px}
+#count{font-size:11px;color:var(--txt-faint);margin:4px 0 14px;text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+#count::before{content:"▸ "}
+#list{display:flex;flex-direction:column;gap:10px}
+.panel{border:1px solid var(--line);background:var(--panel);position:relative}
+.panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,#1c6a42);opacity:.85}
+.panel.tier-50{--accent:var(--txt)}
+.panel.tier-30{--accent:var(--cyan)}
+.panel.tier-noc{--accent:var(--amber)}
+.panel.tier-noe{--accent:var(--red)}
+.panel-header{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:11px 16px 11px 18px;cursor:pointer;user-select:none;transition:.12s}
+.panel-header:hover{background:#0b1a11}
+.tier-badge{font-size:11px;padding:2px 9px;border:1px solid currentColor;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.panel.tier-50 .tier-badge{color:var(--txt);text-shadow:var(--glow)}
+.panel.tier-30 .tier-badge{color:var(--cyan);text-shadow:0 0 8px rgba(56,198,255,.4)}
+.panel.tier-noc .tier-badge{color:var(--amber);text-shadow:0 0 8px rgba(255,207,63,.4)}
+.panel.tier-noe .tier-badge{color:var(--red);text-shadow:0 0 8px rgba(255,107,92,.4)}
+.meta{font-size:12.5px;color:var(--txt-mid);letter-spacing:.5px;white-space:nowrap}
+.meta b{color:var(--txt-faint);font-weight:700;margin-right:4px;text-transform:uppercase;font-size:11px;letter-spacing:1px}
+.chev{margin-left:auto;color:var(--txt);font-size:12px;transition:transform .15s;text-shadow:var(--glow)}
+.panel.open .chev{transform:rotate(90deg)}
+.panel-body{display:none;padding:14px 16px 18px;border-top:1px solid var(--line);background:#060d08}
+.panel.open .panel-body{display:block}
+.sim{border:1px solid var(--line);background:#040c07;padding:1.4rem 1.7rem;box-shadow:inset 0 0 30px rgba(0,0,0,.6),var(--glow-soft);display:flex;flex-wrap:wrap;gap:1.75rem;align-items:center}
+.sim-cases{flex:0 1 auto;display:flex;flex-wrap:wrap;gap:1rem;align-content:center}
+.sim-right{flex:1 1 0;min-width:17rem;display:flex;flex-direction:column;gap:1.1rem;justify-content:center}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.85rem}
+.stat{border:1px solid var(--line);background:#05100a;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.stat .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint)}
+.stat .v{font-size:1.55rem;color:var(--txt);text-shadow:var(--glow);font-weight:700;line-height:1.1;white-space:nowrap}
+.stat .sub{font-size:.79rem;color:var(--txt-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.comp-sec{border-top:1px solid var(--line);padding-top:.9rem}
+.comp-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-faint);margin-bottom:.65rem}
+.comp{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{background:#04100a;border:1px solid var(--line);padding:.36rem .86rem;font-size:.92rem;color:var(--txt-mid);letter-spacing:.5px}
+.chip b{color:var(--txt);margin-right:.43rem;font-weight:700;text-shadow:var(--glow)}
+.case{flex:0 0 auto;width:clamp(9.5rem,15vw,12.5rem);display:flex;flex-direction:column;gap:.55rem;border:1px solid var(--line);padding:.65rem;background:#050f09}
+.case-title{font-size:.79rem;color:var(--txt-faint);text-transform:uppercase;letter-spacing:.1em}
+.case-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:.16rem;aspect-ratio:1}
+.cell{background:#06120b;border:1px solid var(--line-soft);transition:.1s}
+.cell:hover{border-color:var(--txt-faint);background:#0a1c12}
+.comp{position:relative;display:flex;align-items:center;justify-content:center;background:#06120b;border:1px solid var(--line);overflow:hidden}
+.comp img{width:100%;height:100%;object-fit:contain}
+.comp.psu-v img{width:200%;height:100%;object-fit:contain;transform:rotate(90deg)}
+.comp:hover{border-color:var(--txt);background:#0a1c12}
+.comp:hover::after{content:attr(title);position:absolute;bottom:2px;right:3px;font-size:.6rem;letter-spacing:.4px;color:var(--txt);text-shadow:var(--glow);background:rgba(4,12,7,.8);padding:1px 4px;border:1px solid var(--line-soft)}
+.crt-footer{position:fixed;left:0;right:0;bottom:0;z-index:900;display:flex;justify-content:space-between;align-items:center;gap:10px;
+border-top:1px solid var(--line);background:#050d08;padding:11px 22px;
+font-size:11px;color:var(--txt-faint);text-transform:uppercase;letter-spacing:2px;transition:right .22s ease}
+.crt-footer .badge{border:1px solid var(--line);padding:2px 8px;color:var(--txt-mid);letter-spacing:2px}
+.crt-footer .author{color:var(--txt);text-shadow:0 0 8px rgba(61,255,134,.5);letter-spacing:2.5px;font-weight:700}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--txt);box-shadow:var(--glow);margin-right:7px;animation:blink 1.4s steps(1) infinite;vertical-align:middle}
+.info-toggle{position:fixed;top:14px;right:16px;z-index:1200;padding:8px 14px;border:1px solid var(--line);border-radius:0;background:#04100a;color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.12s}
+.info-toggle:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft);text-shadow:var(--glow)}
+.info-toggle.hidden{display:none}
+.info-panel{position:fixed;top:0;right:0;bottom:0;width:var(--panel-w);background:#050d08;border-left:1px solid var(--line);box-shadow:-10px 0 34px rgba(0,0,0,.65);transform:translateX(102%);transition:transform .22s ease;z-index:1100;display:flex;flex-direction:column}
+.info-panel.open{transform:translateX(0)}
+.info-panel-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);background:#07120c}
+.info-panel-title{font-size:13px;letter-spacing:3px;color:var(--txt);text-shadow:var(--glow);text-transform:uppercase;font-weight:700}
+.info-close{background:transparent;border:1px solid var(--line);color:var(--txt-mid);font:inherit;font-size:13px;width:28px;height:28px;cursor:pointer;transition:.12s;line-height:1}
+.info-close:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft)}
+.info-panel-body{padding:16px;overflow-y:auto;overflow-x:hidden;overflow-wrap:break-word;word-break:break-word;line-height:1.7;flex:1}
+.info-placeholder{color:var(--txt-faint);letter-spacing:1.5px;text-transform:uppercase;font-size:12px;margin-bottom:10px}
+body.panel-open{padding-right:calc(var(--panel-w) + 22px)}
+body.panel-open .crt-footer{right:calc(var(--panel-w) + 22px)}
+.info-panel-body h3{color:var(--txt);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:20px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line);text-shadow:var(--glow)}
+.info-panel-body h3:first-child{margin-top:0}
+.info-panel-body p{color:var(--txt-mid);font-size:13px;margin:0 0 10px}
+.info-panel-body ul,.info-panel-body ol{margin:0 0 12px 18px;color:var(--txt-mid);font-size:13px}
+.info-panel-body li{margin-bottom:6px}
+.info-panel-body li::marker{color:var(--txt)}
+.info-panel-body code{color:var(--amber);background:#0a1a10;border:1px solid var(--line-soft);padding:1px 5px;font-size:12px;white-space:normal;overflow-wrap:break-word}
+.info-panel-body b,.info-panel-body .term{color:var(--txt);text-shadow:var(--glow)}
+.info-panel-body .note{border-left:3px solid var(--amber);background:#0a140d;padding:8px 12px;margin:12px 0;font-size:12.5px;color:var(--txt-mid)}
+.info-panel-body table{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:12.5px}
+.info-panel-body th{color:var(--txt);text-align:left;border-bottom:1px solid var(--line);padding:5px 8px;text-transform:uppercase;letter-spacing:1px;font-size:11px}
+.info-panel-body td{border-bottom:1px solid var(--line-soft);padding:5px 8px;color:var(--txt-mid)}
+.info-panel-body th,.info-panel-body td{overflow-wrap:break-word}
+/* themed scrollbars */
+*{scrollbar-width:thin;scrollbar-color:var(--txt-dim) #060f09}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:#050f09}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--txt-dim),var(--txt-faint));border:2px solid #050f09;border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(var(--txt),var(--txt-mid))}
+::-webkit-scrollbar-corner{background:#050f09}
+</style>
+</head>
+<body>
+<h1>Cracking Rig Database</h1>
+<div class="toolbar">
+<input id="search" type="text" placeholder="Search MIPS, component...">
+<button class="tbtn" id="expandAll">Expand all</button>
+<button class="tbtn" id="collapseAll">Collapse all</button>
+</div>
+<div class="tier-tabs">
+<button class="tier-tab active" data-tier="NO Educations">No Educations</button>
+<button class="tier-tab" data-tier="NO OC + Heat Red">Only Heat Reduction</button>
+<button class="tier-tab" data-tier="30% OC">30% Overclock</button>
+<button class="tier-tab" data-tier="50% OC">50% Overclock</button>
+</div>
+<div class="sortbar">
+<span class="lbl">Sort:</span>
+<button data-col="2" class="active asc">MIPS</button>
+<button data-col="3">BFS</button>
+<button data-col="1">Cases</button>
+<button data-col="4">Heat</button>
+<button data-col="5">Uses</button>
+</div>
+<div id="count"></div>
+<div id="list"></div>
+<script src="rigs-data.js"></script>
+<script>
+// D and LAYOUTS are loaded from rigs-data.js
+
+
+const list=document.getElementById("list");
+const search=document.getElementById("search");
+const count=document.getElementById("count");
+const expanded=new Set();
+let sortCol=2,sortAsc=true;
+let tierFilter="NO Educations";
+const TIER_DISPLAY={"NO Educations":"No Educations","NO OC + Heat Red":"Only Heat Reduction","30% OC":"30% Overclock","50% OC":"50% Overclock"};
+
+const COMPONENTS=[["eCPU",6],["CPU",7],["HPCU",8],["Fan",9],["Water Block",10],["Heat Sink",11],["PSU",12]];
+const GRID=25; // 5x5 case board
+// ---- Component placement ----
+const IMG={"eCPU":"eCPU","CPU":"CPU","HPCU":"HPCPU","Fan":"Computer_Fan","Water Block":"Water-Block","Heat Sink":"Heat-Sink","PSU":"PSU"};
+// Per-rig case layouts.  Key = tier|cases|MIPS (unique per rig).
+// Each case is a list of placed parts: {t:type, r:row 0-4 (top=0), c:col 0-4 (left=0)}
+//   PSU is 2-wide: add o:"h" (2 cells across a row) or o:"v" (2 cells down a column).
+//   All other parts are 1x1.  Fill the remaining slots automatically with empty cells.
+
+function caseHTML(layout){
+ const N=5;
+ // build occupancy grid (PSU covers 2 cells)
+ const occ=Array.from({length:N},()=>Array(N).fill(false));
+ layout.forEach(p=>{
+  occ[p.r][p.c]=true;
+  if(p.t==="PSU"){ if(p.o==="v")occ[p.r+1][p.c]=true; else occ[p.r][p.c+1]=true; }
+ });
+ let h="";
+ // empty slots (explicit positions, so partial layouts can't drift)
+ for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+  if(!occ[r][c])h+=`<div class="cell" style="grid-column:${c+1};grid-row:${r+1}"></div>`;
+ }
+ // components (explicit positions; PSU spans 2)
+ layout.forEach(p=>{
+  const w=(p.t==="PSU"&&p.o!=="v")?2:1;
+  const hh=(p.t==="PSU"&&p.o==="v")?2:1;
+  const cls="comp "+p.t.toLowerCase().replace(/\s+/g,"-")+(p.t==="PSU"&&p.o==="v"?" psu-v":"");
+  h+=`<div class="${cls}" style="grid-column:${p.c+1}/span ${w};grid-row:${p.r+1}/span ${hh}" title="${p.t}"><img src="images/${IMG[p.t]}.webp" alt="${p.t}"></div>`;
+ });
+ return h;
+}
+
+function tierClass(t){
+if(t.startsWith("50%"))return"tier-50";
+if(t.startsWith("30%"))return"tier-30";
+if(t.startsWith("NO OC"))return"tier-noc";
+return"tier-noe";
+}
+function usesVal(v){return v==="∞"?Infinity:Number(v);}
+
+function cmp(a,b,c){
+if(c===5){let va=usesVal(a[c]),vb=usesVal(b[c]);return sortAsc?va-vb:vb-va;}
+let va=a[c],vb=b[c];
+if(typeof va==="string"||typeof vb==="string")return sortAsc?String(va).localeCompare(String(vb)):String(vb).localeCompare(String(va));
+return sortAsc?va-vb:vb-va;
+}
+function getView(){
+let data=D.filter(r=>r[0]===tierFilter);
+const q=search.value.trim().toLowerCase();
+if(q)data=data.filter(r=>r.join(" ").toLowerCase().includes(q));
+if(sortCol!==null)data.sort((a,b)=>cmp(a,b,sortCol));
+return data;
+}
+function headerHTML(r){
+return `<span class="tier-badge">${TIER_DISPLAY[r[0]]||r[0]}</span>`+
+`<span class="meta"><b>MIPS</b>${r[2].toLocaleString()}</span>`+
+`<span class="meta"><b>Cases</b>${r[1]}</span>`+
+`<span class="meta"><b>BFS</b>${r[3]}</span>`+
+`<span class="meta"><b>Heat</b>${r[4]}</span>`+
+`<span class="meta"><b>Uses</b>${r[5]==="∞"?"∞":r[5]}</span>`+
+`<span class="chev">&#9656;</span>`;
+}
+function bodyHTML(r){
+const total=r.slice(6).reduce((s,v)=>s+v,0);
+const power=r[12]*750;
+const comps=COMPONENTS.map(([name,i])=>`<span class="chip"><b>${name}</b>${r[i]}</span>`).join("");
+let cases="";
+const rigLayouts=LAYOUTS[r[0]+"|"+r[1]+"|"+r[2]];
+for(let c=0;c<r[1];c++){
+const lay=(rigLayouts&&rigLayouts[c])?rigLayouts[c]:null;
+const cells=lay?caseHTML(lay):Array(GRID).fill("<div class='cell'></div>").join("");
+cases+=`<div class="case"><div class="case-title">Case ${c+1}</div><div class="case-grid">${cells}</div></div>`;
+}
+return `<div class="sim">`+
+`<div class="sim-cases">${cases}</div>`+
+`<div class="sim-right">`+
+`<div class="stat-grid">`+
+`<div class="stat"><span class="k">MIPS</span><span class="v">${r[2].toLocaleString()}</span><span class="sub">from rig</span></div>`+
+`<div class="stat"><span class="k">BFS</span><span class="v">${r[3]}</span><span class="sub">brute-force strength</span></div>`+
+`<div class="stat"><span class="k">Components</span><span class="v">${total}</span><span class="sub">total</span></div>`+
+`<div class="stat"><span class="k">Rig power</span><span class="v">${power.toLocaleString()} W</span><span class="sub">${r[12]} &times; 750 W PSU</span></div>`+
+`<div class="stat"><span class="k">Heat gain</span><span class="v">${r[4]}</span><span class="sub">heat</span></div>`+
+`<div class="stat"><span class="k">Rig uses</span><span class="v">${r[5]==="∞"?"∞":r[5]}</span><span class="sub">uses</span></div>`+
+`</div>`+
+`<div class="comp-sec"><div class="comp-label">Component counts</div><div class="comp">${comps}</div></div>`+
+`</div>`+
+`</div>`;
+}
+function render(){
+const data=getView();
+list.innerHTML="";
+data.forEach(r=>{
+const id=D.indexOf(r);
+const panel=document.createElement("div");
+panel.className="panel "+tierClass(r[0]);
+const header=document.createElement("div");
+header.className="panel-header";
+header.innerHTML=headerHTML(r);
+const body=document.createElement("div");
+body.className="panel-body";
+if(expanded.has(id)){panel.classList.add("open");body.innerHTML=bodyHTML(r);}
+header.addEventListener("click",()=>toggle(id,panel,body));
+panel.appendChild(header);
+panel.appendChild(body);
+list.appendChild(panel);
+});
+count.textContent=data.length+" rig"+(data.length!==1?"s":"");
+}
+function toggle(id,panel,body){
+if(expanded.has(id)){expanded.delete(id);panel.classList.remove("open");}
+else{expanded.add(id);panel.classList.add("open");if(!body.innerHTML)body.innerHTML=bodyHTML(D[id]);}
+}
+function updateSortUI(){
+document.querySelectorAll(".sortbar button").forEach(b=>b.classList.remove("active","asc","desc"));
+if(sortCol!==null){
+const b=document.querySelector('.sortbar button[data-col="'+sortCol+'"]');
+if(b){b.classList.add("active",sortAsc?"asc":"desc");}
+}
+}
+search.addEventListener("input",render);
+document.querySelectorAll(".tier-tab").forEach(tab=>{
+tab.addEventListener("click",()=>{
+document.querySelectorAll(".tier-tab").forEach(t=>t.classList.remove("active"));
+tab.classList.add("active");
+tierFilter=tab.dataset.tier;
+expanded.clear();
+render();
+});
+});
+document.querySelectorAll(".sortbar button").forEach(btn=>{
+btn.addEventListener("click",()=>{
+const ci=parseInt(btn.dataset.col);
+if(sortCol===ci){sortAsc=!sortAsc;}else{sortCol=ci;sortAsc=true;}
+updateSortUI();render();
+});
+});
+document.getElementById("expandAll").addEventListener("click",()=>{D.forEach((r,i)=>expanded.add(i));render();});
+document.getElementById("collapseAll").addEventListener("click",()=>{expanded.clear();render();});
+function setInfo(open){
+const panel=document.getElementById("infoPanel");
+document.body.classList.toggle("panel-open",open);
+panel.classList.toggle("open",open);
+document.getElementById("infoToggle").classList.toggle("hidden",open);
+panel.setAttribute("aria-hidden",open?"false":"true");
+}
+function initInfo(){
+document.getElementById("infoToggle").addEventListener("click",()=>setInfo(true));
+document.getElementById("infoClose").addEventListener("click",()=>setInfo(false));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")setInfo(false);});
+}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initInfo);}else{initInfo();}
+updateSortUI();
+render();
+</script>
+<button id="infoToggle" class="info-toggle">▸ Cracking Info</button>
+<aside id="infoPanel" class="info-panel" aria-hidden="true">
+<div class="info-panel-head">
+<span class="info-panel-title">Cracking Reference</span>
+<button id="infoClose" class="info-close" title="Close">✕</button>
+</div>
+<div class="info-panel-body">
+<h3>Core Mechanics</h3>
+<ul>
+<li>Cracking is a <b>Cybercrime</b> (10th of Crimes 2.0) — brute-force + guess to break Torn's weak <b>ICE</b> (Individual Character Encryption) passwords.</li>
+<li>Passwords are <b>4–10 chars</b>; advanced targets add <b>1–9 encryption layers</b> that must be brute-forced off before characters can be guessed.</li>
+<li><b>Brute-forcing</b> = <b>7 nerve</b>/attempt — each success reveals 1 char <i>or</i> breaks 1 encryption layer.</li>
+<li><b>Cracking</b> (final step) = <b>5 nerve</b>/attempt — only once every char is revealed; success pays money, <b>critical failure</b> = job lost + jail <b>3h16m–6h23m</b>.</li>
+<li><b>Guessing</b> (unencrypted chars only): up to <b>3 wrong guesses</b> per password before lockout.</li>
+<li>Rig comes online with <b>1+ PSU</b> and <b>≥100,000 MIPS</b>; power budget = PSUs × <b>750W</b>.</li>
+<li>Chassis are <b>5×5</b>, unlocked at Cracking skill <b>25 / 50 / 75</b> (starts as an offline computer, BFS 1).</li>
+<li><b>28 target types</b>; <b>7–26</b> jobs spawn daily at midnight TCT and roll over if progress was made.</li>
+<li>Honors: <b>CRYPTOGRAPHER</b> @ CS100 · <b>CHARACTER ASSASSINATION</b> @ 250 chars guessed.</li>
+</ul>
+
+<h3>Components</h3>
+<table>
+<tr><th>Part</th><th>Draw</th><th>MIPS</th><th>Heat</th><th>OC cap</th></tr>
+<tr><td>eCPU</td><td>30W</td><td>25,000</td><td>Low</td><td>Limited</td></tr>
+<tr><td>CPU</td><td>70W</td><td>30,000</td><td>High</td><td>Standard</td></tr>
+<tr><td>HPCPU</td><td>150W</td><td>50,000</td><td>Very high</td><td>Enhanced</td></tr>
+<tr><td>Computer Fan</td><td>5W</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Water Block</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Heat Sink</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>PSU</td><td>—</td><td>—</td><td>Moderate</td><td>—</td></tr>
+</table>
+<p><b>eCPU</b> = cheap, low heat, weakest OC. <b>CPU</b> = balanced, <b>high</b> heat. <b>HPCPU</b> = best MIPS/W &amp; OC, hottest. <b>Computer Fan</b> (5W) = broad-area. <b>Water Block</b> = strong, confined. <b>Heat Sink</b> = adjacent only. <b>PSU</b> = 750W, <b>2 slots</b> (rotatable), moderate heat. Fan / Water Block / Heat Sink are <b>overheat-immune</b>.</p>
+<p>Parts work <b>across the whole rig</b> (a PSU in one chassis powers CPUs in another); <b>heat stays per-chassis</b>, and a slot's heat carries to the next part you install there.</p>
+
+<h3>Brute-Force Strength (BFS)</h3>
+<p><code>BFS = 0.0052 × √MIPS − 0.6252</code> <span style="color:var(--txt-faint);font-size:11px">(≈ ±3%)</span></p>
+<p>Higher BFS = more brute-force cycles per attempt = faster cracking. Extra MIPS raise BFS with <b>diminishing (logarithmic) returns</b> — so more MIPS ≠ proportionally faster.</p>
+<table>
+<tr><th>MIPS</th><td>100k</td><td>250k</td><td>425k</td><td>805k</td><td>1.3M</td><td>2M</td></tr>
+<tr><th>BFS</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+</table>
+
+<h3>Heat &amp; Overheating</h3>
+<ul>
+<li><b>0–50</b>: Normal (safe).</li>
+<li><b>50–99</b>: Hot (red aura) — still works, but <b>can't be removed</b> until it drops below 50%.</li>
+<li><b>100+</b>: <b>OVERHEAT</b> — stops working until it cools below 100% (not lost).</li>
+<li>Heat can reach <b>150%</b>; decays naturally <b>1% / 60s</b>. A fully-overheated part takes <b>2h30m</b> to cool.</li>
+<li>Heat is <b>per-chassis</b>; a removed part's heat <b>stays in the slot</b> and carries to the next part installed there.</li>
+<li><b>Heat Sinks &amp; Water Blocks are overheat-immune</b> — they keep cooling regardless of their own heat.</li>
+</ul>
+<p class="note"><b>CMT2570</b> (Fundamentals of Computer Architecture) reduces heat <b>generated</b> by all components by <b>25%</b>.</p>
+
+<h3>Cooling</h3>
+<ul>
+<li><b>Computer Fan</b> (5W): <b>broad area</b> (~3 tiles — adj −3, 2-tile −6, 3-tile −9 to −12). Cheapest, overheat-immune.</li>
+<li><b>Water Block</b>: <b>confined, strong</b> (1 tile); survives 8 HPCUs. Overheat-immune.</li>
+<li><b>Heat Sink</b>: <b>adjacent only</b> (removes ~90% of a neighbor's heat). Overheat-immune.</li>
+</ul>
+
+<h3>Overclocking</h3>
+<ul>
+<li>Set by dragging the power gauge into the <b>orange/red</b> zone; steps of <b>10%</b> (max <b>150%</b>). Affects <b>CPUs only</b> — fan draw &amp; PSU heat are unaffected.</li>
+<li>OC raises <b>power + heat</b> for all CPUs in proportion to the rate. <b>HPCPUs gain more MIPS per % than eCPUs</b> (eCPUs scale lowest).</li>
+<li>Unlocks: <b>CMT2128</b> → <b>30%</b> OC · <b>CMT2129</b> → <b>50%</b> OC (max). <b>CMT2570</b> is the heat-reduction course, <i>not</i> an OC unlock.</li>
+</ul>
+<table>
+<tr><th>OC</th><th>eCPU</th><th>CPU</th><th>HPCPU</th></tr>
+<tr><td>100%</td><td>30W / 25,000</td><td>70W / 30,000</td><td>150W / 50,000</td></tr>
+<tr><td>110%</td><td>33W / 26,250</td><td>77W / 32,250</td><td>165W / 55,000</td></tr>
+<tr><td>120%</td><td>36W / 27,500</td><td>84W / 34,500</td><td>180W / 60,000</td></tr>
+<tr><td>130%</td><td>39W / 28,750</td><td>91W / 36,750</td><td>195W / 65,000</td></tr>
+<tr><td>140%</td><td>42W / 30,000</td><td>98W / 39,000</td><td>210W / 70,000</td></tr>
+<tr><td>150%</td><td>45W / 31,250</td><td>105W / 41,250</td><td>225W / 75,000</td></tr>
+</table>
+<h3>Rig Classifications</h3>
+<ul>
+<li><b>Zero-Heat</b> — all components at 0 (full cooling coverage).</li>
+<li><b>Low-Heat</b> — &lt;50 on all, 0 overheated.</li>
+<li><b>Mid-Heat</b> — 50–99 on some, 0 overheated.</li>
+<li><b>High-Heat</b> — some at 100+ (few uses before overheat).</li>
+<li>Also classified by OC (pre/post) &amp; chassis count (1–3).</li>
+</ul>
+
+<h3>Rig Design Patterns</h3>
+<ul>
+<li><b>eCPU-centric</b> — many eCPUs, low power, ideal for zero/low-heat. (ex. ~535k MIPS @ 720W/750W)</li>
+<li><b>HPCU-centric</b> — fewer HPCUs, high MIPS, heavy cooling. (ex. ~716k MIPS @ 2140W/2250W)</li>
+<li><b>Standardized</b> — repeat one proven layout across multiple chassis; balanced.</li>
+<li><b>Power Bank</b> — dedicate a chassis to PSUs for OC headroom; others process.</li>
+</ul>
+
+<h3>Skill-Growth Paths</h3>
+<ul>
+<li><b>Slow / efficient</b> — guess or brute-force once, then solve with minimal attempts. Feeds Character Assassination.</li>
+<li><b>Quick / CS-farm</b> — brute-force everything, no guessing. Fast daily CS, unlocks harder jobs sooner.</li>
+</ul>
+
+<h3>Honors &amp; Merits</h3>
+<ul>
+<li><b>CRYPTOGRAPHER</b> — reach CS100.</li>
+<li><b>CHARACTER ASSASSINATION</b> — guess 250 password characters.</li>
+<li>All cracking = cybercrime offenses; max medal = <b>10,000</b> offenses (~60–70k nerve).</li>
+</ul>
+
+<h3>Enhancers &amp; Tools</h3>
+<ul>
+<li><b>Office Chair</b> — the official <b>Crime Enhancer</b> for Cracking.</li>
+<li><b>Computer / laptop</b> — required to attempt; also your starting offline rig (BFS 1). PC buy $1,350 / sell $300.</li>
+</ul>
+
+<h3>Education (Cracking track)</h3>
+<ul>
+<li><b>CMT1520</b> Introduction to Computing — <b>required</b> to unlock Cracking (plus a computer).</li>
+<li><b>CMT2570</b> Fundamentals of Computer Architecture → <b>−25% heat</b> generated (no OC).</li>
+<li><b>CMT2128</b> Overclocking → <b>30%</b> OC.</li>
+<li><b>CMT2129</b> Advanced Overclocking → <b>50%</b> OC (max).</li>
+</ul>
+
+<h3>Targets — Unencrypted (13)</h3>
+<p>No encryption layers — characters can be guessed directly (≤3 wrong).</p>
+<table>
+<tr><th>Target</th><th>Skill</th><th>Reward</th></tr>
+<tr><td>Colleague</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Ex-Boyfriend</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Ex-Girlfriend</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Ex-Husband</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Ex-Wife</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Friend</td><td>—</td><td>$10k–25k</td></tr>
+<tr><td>Informant</td><td>—</td><td>$30k–50k</td></tr>
+<tr><td>Juror</td><td>—</td><td>$30k–50k</td></tr>
+<tr><td>Neighbour</td><td>—</td><td>$10k–25k</td></tr>
+<tr><td>Online Adversary</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Romantic Interest</td><td>—</td><td>$10k–30k</td></tr>
+<tr><td>Doctor</td><td>30</td><td>$35k–140k</td></tr>
+<tr><td>Judge</td><td>30</td><td>$40k–99.6k</td></tr>
+</table>
+<h3>Targets — Encrypted (15)</h3>
+<p>Layers must be brute-forced off before characters can be guessed.</p>
+<table>
+<tr><th>Target</th><th>Skill</th><th>Layers</th><th>Reward</th></tr>
+<tr><td>Hacker</td><td>10</td><td>1</td><td>$50k–199.8k</td></tr>
+<tr><td>Police Officer</td><td>20</td><td>1</td><td>$40k–90k</td></tr>
+<tr><td>Government Official</td><td>30</td><td>1</td><td>$70k–130k</td></tr>
+<tr><td>Politician</td><td>40</td><td>1</td><td>$60k–119.9k</td></tr>
+<tr><td>Pornography Network</td><td>40</td><td>1</td><td>$80.5k–149.8k</td></tr>
+<tr><td>Campus Network</td><td>50</td><td>1</td><td>$60k–180k</td></tr>
+<tr><td>Health Service</td><td>50</td><td>1</td><td>$80.1k–150k</td></tr>
+<tr><td>Games Developer</td><td>60</td><td>2</td><td>$60.1k–149.9k</td></tr>
+<tr><td>Rival Corporation</td><td>60</td><td>2</td><td>$80.1k–250k</td></tr>
+<tr><td>Police Department</td><td>70</td><td>3</td><td>$100.3k–250k</td></tr>
+<tr><td>Criminal Syndicate</td><td>70</td><td>3</td><td>$100.3k–348.5k</td></tr>
+<tr><td>Government</td><td>80</td><td>3</td><td>$150.2k–499.4k</td></tr>
+<tr><td>Internet Service Provider</td><td>80</td><td>3</td><td>$175k–294.9k</td></tr>
+<tr><td>Armed Forces</td><td>90</td><td>9</td><td>$400k–749.8k</td></tr>
+<tr><td>Intelligence Agency</td><td>90</td><td>9</td><td>$402.6k–997.6k</td></tr>
+</table>
+<h3>Key Formulas</h3>
+<ul>
+<li><code>BFS = 0.0052 × √MIPS − 0.6252</code></li>
+<li><code>Total MIPS = Σ component MIPS (after OC)</code></li>
+<li><code>Total Power = Σ component draw (after OC) ≤ budget</code></li>
+<li><code>Heat = (base × OC) − Σ cooling(adjacent)</code></li>
+<li>Heat radiates between adjacent components.</li>
+</ul>
+</div>
+</aside>
+<footer class="crt-footer">
+<span><span class="dot"></span>ONLINE &middot; RIG DATABASE</span>
+<span class="author">Frieza [4025189]</span>
+<span>v1.7.0 <span class="badge">TERMINAL</span></span>
+</footer>
+</body>
+</html>
