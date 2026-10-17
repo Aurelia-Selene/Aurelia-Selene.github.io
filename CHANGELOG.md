@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.8.2] — 2026-10-17
+### Fixed
+- **Tier tab centering on desktop** — tabs are centered again above 640px; left-aligned below (mobile scroll fix).
+
 ## [1.8.1] — 2026-10-17
 ### Fixed
 - **Tier tabs on mobile** — tab bar scrolls horizontally with snap points instead of clipping. Tighter padding below 640px.

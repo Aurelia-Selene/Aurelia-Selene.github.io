@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Version: 1.8.1 | Author: Frieza [4025189] -->
+<!-- Version: 1.8.2 | Author: Frieza [4025189] -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -38,7 +38,7 @@ border-radius:0;background-color:#04100a;color:var(--txt);font:inherit;letter-sp
 .tbtn{padding:8px 14px;border:1px solid var(--line);border-radius:0;background:#04100a;
 color:var(--txt-mid);font:inherit;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.12s}
 .tbtn:hover{border-color:var(--txt);color:var(--txt);box-shadow:var(--glow-soft);text-shadow:var(--glow)}
-.tier-tabs{display:flex;gap:0;justify-content:flex-start;margin-bottom:14px;border:1px solid var(--line);
+.tier-tabs{display:flex;gap:0;justify-content:center;margin-bottom:14px;border:1px solid var(--line);
 overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .tier-tabs::-webkit-scrollbar{display:none}
 .tier-tab{padding:8px 16px;border:none;border-right:1px solid var(--line);background:#04100a;
@@ -52,6 +52,7 @@ color:var(--txt-mid);font:inherit;font-size:11px;text-transform:uppercase;letter
 .tier-tab:hover{border-color:var(--tab-color);color:var(--tab-color)}
 .tier-tab.active{background:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,.2));border-color:var(--tab-color);color:var(--tab-color);box-shadow:var(--tab-glow);text-shadow:0 0 6px rgba(255,255,255,.3)}
 @media(max-width:640px){
+.tier-tabs{justify-content:flex-start}
 .tier-tab{padding:8px 12px;font-size:10px;letter-spacing:1px}
 }
 .sortbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin-bottom:8px;font-size:12px}
@@ -508,7 +509,7 @@ render();
 <footer class="crt-footer">
 <span><span class="dot"></span>ONLINE</span>
 <span class="author">Frieza [4025189]</span>
-<span>v1.8.1</span>
+<span>v1.8.2</span>
 </footer>
 </body>
 </html>
