@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.25.0] — 2026-10-18
+### Added
+- **50% Overclock layouts (3-case rigs)** — all 17 three-case rigs in the tier now have a layout, from 2,503,750 to 3,491,250 MIPS.
+### Fixed
+- **2,822,500 MIPS row** — PSU count 12 → 11; 11 is the true minimum (8,205W draw vs 8,250W capacity).
+
 ## [1.24.0] — 2026-10-18
 ### Added
 - **50% Overclock layouts (2-case rigs)** — all 10 two-case rigs in the tier now have a layout, from 1,593,750 to 2,278,750 MIPS.
