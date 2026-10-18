@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.24.0] — 2026-10-18
+### Added
+- **50% Overclock layouts (2-case rigs)** — all 10 two-case rigs in the tier now have a layout, from 1,593,750 to 2,278,750 MIPS.
+
 ## [1.23.0] — 2026-10-18
 ### Added
 - **50% Overclock layouts (1-case rigs)** — all 15 one-case rigs in the tier now have a layout, from 750,000 to 1,125,000 MIPS.
