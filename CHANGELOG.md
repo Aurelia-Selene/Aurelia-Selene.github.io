@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.23.0] — 2026-10-18
+### Added
+- **50% Overclock layouts (1-case rigs)** — all 15 one-case rigs in the tier now have a layout, from 750,000 to 1,125,000 MIPS.
+
 ## [1.22.0] — 2026-10-18
 ### Fixed
 - **HPCU count** — `50% OC · 1 case · 1,125,000` row corrected 14 → 15 HPCU (15 × 75,000 at 50% OC).
