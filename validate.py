@@ -19,6 +19,7 @@ for key,cases in L.items():
     exp={'eCPU':r[6],'CPU':r[7],'HPCU':r[8],'Fan':r[9],'WaterBlock':r[10],'HeatSink':r[11],'PSU':r[12]}
     got={'eCPU':0,'CPU':0,'HPCU':0,'Fan':0,'WaterBlock':0,'HeatSink':0,'PSU':0}
     if len(cases)!=int(nc): problems.append((key,'case count %d!=%s'%(len(cases),nc)))
+    if int(r[1])!=int(nc): problems.append((key,'key cases %s != D cases %s'%(nc,r[1])))
     for ci,case in enumerate(cases):
         ccells=set()
         for o in case:

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.21.0] — 2026-10-18
+### Added
+- **30% Overclock layouts** — all **23** rigs in the tier now have a layout, replacing the "Layout Pending" placeholders.
+
+### Changed
+- **Heat gain corrections** — 3 rigs in 30% OC had stale `150` heat values, corrected to: `1012250` → 180.56, `2080000` → 216.15, `3185000` → 216.15.
+
 ## [1.20.3] — 2026-10-18
 ### Changed
 - **BFS precision** — recomputed all **96** BFS values to 4 decimal places from the fitted curve and displayed to 4 dp (e.g. `3.85` → `3.8573`), matching the in-game readout.

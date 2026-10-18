@@ -120,7 +120,7 @@ const D=[
 
 ["30% OC",1,845000,4.0888,70.46,2,0,0,13,0,4,0,4],
 
-["30% OC",1,1012250,4.4513,150,1,1,2,14,0,0,0,4],
+["30% OC",1,1012250,4.4513,180.56,1,1,2,14,0,0,0,4],
 
 ["30% OC",2,1467750,5.2414,0,"∞",2,3,20,0,8,5,6],
 
@@ -132,11 +132,11 @@ const D=[
 
 ["30% OC",2,1625000,5.468,26.44,4,0,0,25,0,4,7,7],
 
-["30% OC",2,2080000,6.0353,150,1,0,0,32,0,0,0,9],
+["30% OC",2,2080000,6.0353,216.15,1,0,0,32,0,0,0,9],
 
 ["30% OC",3,2246750,6.2176,0,"∞",0,1,34,0,12,10,9],
 
-["30% OC",3,3185000,7.0719,150,1,0,0,49,0,0,0,13],
+["30% OC",3,3185000,7.0719,216.15,1,0,0,49,0,0,0,13],
 
 ["NO OC + Heat Red",1,590000,3.411,0,"∞",4,8,5,0,4,0,2],
 
@@ -788,6 +788,238 @@ const LAYOUTS={
   [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
   {t:"HPCU",r:1,c:0}, {t:"PSU",r:1,c:1,o:"v"}, {t:"PSU",r:1,c:2,o:"v"}, {t:"PSU",r:1,c:3,o:"v"}, {t:"HPCU",r:1,c:4},
   {t:"HPCU",r:2,c:0}, {t:"HPCU",r:2,c:4},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}],
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"HPCU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|665750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"eCPU",r:0,c:1}, {t:"eCPU",r:0,c:2}, {t:"eCPU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"CPU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"eCPU",r:1,c:2}, {t:"Water Block",r:1,c:3}, {t:"CPU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"CPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"eCPU",r:4,c:1}, {t:"eCPU",r:4,c:2}, {t:"eCPU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|678750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"Heat Sink",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"PSU",r:1,c:2,o:"h"}, {t:"Heat Sink",r:1,c:4},
+  {t:"eCPU",r:2,c:0}, {t:"Heat Sink",r:2,c:1}, {t:"Fan",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"PSU",r:3,c:1,o:"h"}, {t:"Heat Sink",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"Heat Sink",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|686750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"Heat Sink",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"PSU",r:1,c:1,o:"h"}, {t:"CPU",r:1,c:3}, {t:"Heat Sink",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"Heat Sink",r:2,c:1}, {t:"Fan",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"PSU",r:3,c:1,o:"h"}, {t:"Heat Sink",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"Heat Sink",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|715000":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"Heat Sink",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"PSU",r:1,c:1,o:"h"}, {t:"HPCU",r:1,c:3}, {t:"Heat Sink",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"Heat Sink",r:2,c:1}, {t:"Fan",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"PSU",r:3,c:1,o:"h"}, {t:"Heat Sink",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"Heat Sink",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|715500":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"Heat Sink",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"PSU",r:1,c:1,o:"v"}, {t:"PSU",r:1,c:2,o:"h"}, {t:"HPCU",r:1,c:4},
+  {t:"Heat Sink",r:2,c:0}, {t:"Heat Sink",r:2,c:2}, {t:"PSU",r:2,c:3,o:"v"}, {t:"Heat Sink",r:2,c:4},
+  {t:"HPCU",r:3,c:0}, {t:"CPU",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|743750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"Heat Sink",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"PSU",r:1,c:1,o:"h"}, {t:"PSU",r:1,c:3,o:"v"}, {t:"HPCU",r:1,c:4},
+  {t:"Heat Sink",r:2,c:0}, {t:"PSU",r:2,c:1,o:"v"}, {t:"Heat Sink",r:2,c:2}, {t:"Heat Sink",r:2,c:4},
+  {t:"HPCU",r:3,c:0}, {t:"eCPU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|751750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"Heat Sink",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"PSU",r:1,c:2,o:"h"}, {t:"HPCU",r:1,c:4},
+  {t:"Heat Sink",r:2,c:0}, {t:"PSU",r:2,c:1,o:"v"}, {t:"Heat Sink",r:2,c:2}, {t:"PSU",r:2,c:3,o:"v"}, {t:"Heat Sink",r:2,c:4},
+  {t:"HPCU",r:3,c:0}, {t:"CPU",r:3,c:2}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|753250":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"CPU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"CPU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"CPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"CPU",r:4,c:1}, {t:"eCPU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|761250":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"CPU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"h"}, {t:"eCPU",r:2,c:4},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"CPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"CPU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"CPU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|797500":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"CPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"CPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"CPU",r:4,c:2}, {t:"CPU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|801750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"eCPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"eCPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"CPU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|809750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"CPU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"CPU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"eCPU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|816750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"CPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|845000":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"HPCU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|1|1012250":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"CPU",r:1,c:1}, {t:"CPU",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"eCPU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|2|1467750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"Water Block",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"HPCU",r:1,c:3}, {t:"Water Block",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"HPCU",r:2,c:1}, {t:"Heat Sink",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Water Block",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Heat Sink",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Water Block",r:4,c:3}, {t:"HPCU",r:4,c:4}],
+  [{t:"CPU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"CPU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"eCPU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"PSU",r:1,c:4,o:"v"},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"v"}, {t:"eCPU",r:2,c:3},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"Water Block",r:3,c:3}, {t:"PSU",r:3,c:4,o:"v"},
+  {t:"HPCU",r:4,c:0}, {t:"PSU",r:4,c:1,o:"h"}, {t:"HPCU",r:4,c:3}]
+],
+"30% OC|2|1475750":
+  [
+  [{t:"PSU",r:0,c:0,o:"h"}, {t:"PSU",r:0,c:2,o:"h"}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"CPU",r:1,c:2}, {t:"Water Block",r:1,c:3}, {t:"CPU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"v"}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"Water Block",r:3,c:3}, {t:"CPU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"eCPU",r:4,c:1}, {t:"PSU",r:4,c:2,o:"h"}, {t:"HPCU",r:4,c:4}],
+  [{t:"HPCU",r:0,c:0}, {t:"Heat Sink",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Water Block",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Water Block",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"HPCU",r:1,c:3}, {t:"Heat Sink",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"HPCU",r:2,c:1}, {t:"Heat Sink",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Heat Sink",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Water Block",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Water Block",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|2|1532750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"PSU",r:0,c:1,o:"h"}, {t:"HPCU",r:0,c:3}, {t:"PSU",r:0,c:4,o:"v"},
+  {t:"eCPU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"CPU",r:1,c:2}, {t:"Water Block",r:1,c:3},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"v"}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"CPU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"CPU",r:4,c:1}, {t:"PSU",r:4,c:2,o:"h"}, {t:"HPCU",r:4,c:4}],
+  [{t:"Heat Sink",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"Heat Sink",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"Heat Sink",r:2,c:1}, {t:"Fan",r:2,c:2}, {t:"eCPU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Heat Sink",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Heat Sink",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"Heat Sink",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|2|1545000":
+  [
+  [{t:"PSU",r:0,c:0,o:"h"}, {t:"PSU",r:0,c:2,o:"h"}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"eCPU",r:1,c:2}, {t:"Water Block",r:1,c:3}, {t:"eCPU",r:1,c:4},
+  {t:"eCPU",r:2,c:0}, {t:"PSU",r:2,c:1,o:"h"}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"Water Block",r:3,c:1}, {t:"eCPU",r:3,c:2}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"PSU",r:4,c:0,o:"h"}, {t:"PSU",r:4,c:2,o:"h"}, {t:"HPCU",r:4,c:4}],
+  [{t:"Heat Sink",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"Heat Sink",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"Heat Sink",r:2,c:1}, {t:"Fan",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Heat Sink",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Heat Sink",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"Heat Sink",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|2|1625000":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"PSU",r:0,c:1,o:"h"}, {t:"PSU",r:0,c:3,o:"h"},
+  {t:"HPCU",r:1,c:0}, {t:"Water Block",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"Water Block",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"v"}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"PSU",r:3,c:0,o:"v"}, {t:"Water Block",r:3,c:1}, {t:"Water Block",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"PSU",r:4,c:3,o:"h"}],
+  [{t:"HPCU",r:0,c:0}, {t:"Heat Sink",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"HPCU",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"Heat Sink",r:2,c:0}, {t:"HPCU",r:2,c:1}, {t:"Heat Sink",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"Heat Sink",r:2,c:4},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Heat Sink",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|2|2080000":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"HPCU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}],
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"PSU",r:1,c:0,o:"v"}, {t:"PSU",r:1,c:1,o:"v"}, {t:"PSU",r:1,c:2,o:"v"}, {t:"PSU",r:1,c:3,o:"v"}, {t:"PSU",r:1,c:4,o:"v"},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|3|2246750":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"Water Block",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"HPCU",r:1,c:3}, {t:"Water Block",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"HPCU",r:2,c:1}, {t:"Heat Sink",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Water Block",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Heat Sink",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Water Block",r:4,c:3}, {t:"HPCU",r:4,c:4}],
+  [{t:"PSU",r:0,c:0,o:"v"}, {t:"CPU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"PSU",r:0,c:3,o:"h"},
+  {t:"Water Block",r:1,c:1}, {t:"Water Block",r:1,c:3}, {t:"PSU",r:1,c:4,o:"v"},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"PSU",r:2,c:2,o:"h"},
+  {t:"PSU",r:3,c:0,o:"v"}, {t:"Water Block",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"Water Block",r:3,c:3}, {t:"PSU",r:3,c:4,o:"v"},
+  {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}],
+  [{t:"HPCU",r:0,c:0}, {t:"Water Block",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"Heat Sink",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"Heat Sink",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:2}, {t:"HPCU",r:1,c:3}, {t:"Water Block",r:1,c:4},
+  {t:"HPCU",r:2,c:0}, {t:"HPCU",r:2,c:1}, {t:"Heat Sink",r:2,c:2}, {t:"HPCU",r:2,c:3}, {t:"HPCU",r:2,c:4},
+  {t:"Water Block",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"Heat Sink",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"Heat Sink",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"Water Block",r:4,c:3}, {t:"HPCU",r:4,c:4}]
+],
+"30% OC|3|3185000":
+  [
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"HPCU",r:1,c:0}, {t:"HPCU",r:1,c:1}, {t:"HPCU",r:1,c:3}, {t:"HPCU",r:1,c:4},
+  {t:"PSU",r:2,c:0,o:"h"}, {t:"HPCU",r:2,c:2}, {t:"PSU",r:2,c:3,o:"h"},
+  {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"PSU",r:3,c:2,o:"v"}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
+  {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}],
+  [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"HPCU",r:0,c:2}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
+  {t:"PSU",r:1,c:0,o:"v"}, {t:"PSU",r:1,c:1,o:"v"}, {t:"PSU",r:1,c:2,o:"v"}, {t:"PSU",r:1,c:3,o:"v"}, {t:"PSU",r:1,c:4,o:"v"},
   {t:"HPCU",r:3,c:0}, {t:"HPCU",r:3,c:1}, {t:"HPCU",r:3,c:2}, {t:"HPCU",r:3,c:3}, {t:"HPCU",r:3,c:4},
   {t:"HPCU",r:4,c:0}, {t:"HPCU",r:4,c:1}, {t:"HPCU",r:4,c:2}, {t:"HPCU",r:4,c:3}, {t:"HPCU",r:4,c:4}],
   [{t:"HPCU",r:0,c:0}, {t:"HPCU",r:0,c:1}, {t:"PSU",r:0,c:2,o:"v"}, {t:"HPCU",r:0,c:3}, {t:"HPCU",r:0,c:4},
