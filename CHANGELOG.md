@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.22.0] — 2026-10-18
+### Fixed
+- **HPCU count** — `50% OC · 1 case · 1,125,000` row corrected 14 → 15 HPCU (15 × 75,000 at 50% OC).
+
+### Added
+- **MIPS + power validation** — `validate.py` re-derives each D row's MIPS from component counts and OC level, and checks PSU budget vs draw (over budget → MIPS scaled by budget/draw).
+- **Mechanics in LAYOUTS.md** — seed tail spec, per-component MIPS and power tables (incl. OC scaling), and the power-throttle rule.
+
 ## [1.21.0] — 2026-10-18
 ### Added
 - **30% Overclock layouts** — all **23** rigs in the tier now have a layout, replacing the "Layout Pending" placeholders.

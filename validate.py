@@ -11,6 +11,20 @@ lobj2=re.sub(r'([{,])(\s*)(t|r|c|o)(\s*):', r'\1"\3":', lobj)
 L=json.loads(lobj2); print('LAYOUTS keys:',len(L),'unique:',len(L)==len(set(L)))
 NMAP={'eCPU':'eCPU','CPU':'CPU','HPCU':'HPCU','Fan':'Fan','Water Block':'WaterBlock','Heat Sink':'HeatSink'}
 problems=[]; allmatch=True
+# --- D rows: MIPS + power (draw over budget throttles MIPS by budget/draw) ---
+STEP={'NO Educations':0,'NO OC + Heat Red':0,'30% OC':3,'50% OC':5}
+for r in D:
+    tier,cases,mips=r[0],r[1],r[2]
+    e,c,h,f,p=r[6],r[7],r[8],r[9],r[12]
+    st=STEP[tier]
+    full=(25000+1250*st)*e+(30000+2250*st)*c+(50000+5000*st)*h
+    draw=(30+3*st)*e+(70+7*st)*c+(150+15*st)*h+5*f
+    cap=750*p
+    exp=int(round(((full*cap/draw) if draw>cap else full)/10.0))*10
+    if abs(exp-mips)>10:
+        allmatch=False
+        problems.append((tier+'|'+str(cases)+'|'+str(mips),'MIPS stored=%s expected=%s draw=%dW cap=%dW'%(format(mips,','),format(exp,','),draw,cap)))
+print('D rows MIPS/power checked:',len(D))
 for key,cases in L.items():
     tier,nc,mips=key.split('|'); mips=int(mips)
     drow=[r for r in D if r[2]==mips and r[0]==tier]

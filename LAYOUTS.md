@@ -16,7 +16,9 @@ The single source of truth for the encoding is this file plus `seed_to_layouts.p
 
 ## 2. Seed format (from slw.io/rig)
 
-- Total **75 chars = 25/case × up to 3 cases**; chars 76+ are ignored (tail).
+- **25 chars per case × N cases**, then a **1–2 char tail** encoding rig state (not placement):
+  - optional `C` = CMT2570 education on, then a digit **0–5** = OC level (digit × 10%).
+  - `C3` = CMT2570 + 30% OC · `3` = no education + 30% OC · `0` = base, no OC.
 - Char → component (grid ID):
 
 | Char | Component    | ID |
@@ -79,3 +81,32 @@ Seed (case 1): `hceehewewcpPcpPcweweheech`
  HPCU  eCPU  eCPU  CPU   HPCU
 ```
 Counts: eCPU 8 · CPU 5 · HPCU 4 · Water Block 4 · PSU 2 (23 parts, full grid).
+
+## 7. MIPS per component
+
+OC step `s` = 0–5 (one step = 10%): `30% OC` → s=3, `50% OC` → s=5.
+
+| Component | base (s=0) | per step |
+|-----------|------------|----------|
+| eCPU      | 25,000     | +1,250   |
+| CPU       | 30,000     | +2,250   |
+| HPCU      | 50,000     | +5,000   |
+| Fan / Water Block / Heat Sink / PSU | 0 | — |
+
+Rig MIPS = sum over the compute parts.
+
+## 8. Power
+
+| Component | base (s=0) | per step |
+|-----------|------------|----------|
+| eCPU      | 30 W       | +3 W     |
+| CPU       | 70 W       | +7 W     |
+| HPCU      | 150 W      | +15 W    |
+| Fan       | 5 W        | —        |
+| Water Block / Heat Sink | 0 W | — |
+| PSU       | 750 W each (budget) | — |
+
+- Rig draw = sum over parts; budget = PSUs × 750 W.
+- **Over budget → MIPS throttle.** The simulator does not reject the rig: MIPS scales by `budget ÷ draw`, shown rounded to the nearest 10.
+  - Example: 1 eCPU + 35 HPCU at 0% OC = 5,280 W draw vs 7 × 750 W = 5,250 W budget → 1,775,000 × 5250/5280 = **1,764,910 MIPS**.
+- So a MIPS value that is not a multiple of 5,000 is a throttled rig, not a data error.
